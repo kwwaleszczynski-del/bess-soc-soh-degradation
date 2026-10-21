@@ -1,0 +1,30 @@
+{
+  "strategy_period": [
+    "2025-10-01",
+    "2026-09-30"
+  ],
+  "units": [
+    "TIB1",
+    "BLYTHB1",
+    "TARBESS1",
+    "MREHA1"
+  ],
+  "temperature_c": 25.0,
+  "replacement_cost_aud_per_kwh": [
+    125,
+    250,
+    500
+  ],
+  "headline_cost_aud_per_kwh": 250.0,
+  "beta": 1.0,
+  "model": {
+    "k_cal": 0.0016385796537199042,
+    "ea_cal": 30457.53660350861,
+    "gamma": -0.055976256273313374,
+    "z_cal": 0.5,
+    "k_cyc": 2.1019087063561882e-05,
+    "ea_cyc": 31799.22949493668,
+    "z_cyc": 1.0,
+    "beta": 1.0
+  }
+}

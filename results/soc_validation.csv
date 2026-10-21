@@ -1,0 +1,9 @@
+duid,input,model,energy_mwh,rte,standby_mw,test_from,test_to,daily_anchor_rmse_pp,daily_anchor_mae_pp,end_of_day_p95_pp,open_loop_rmse_pp,open_loop_drift_pp_per_day,calib_r2,calib_windows
+NESBESS1,AEMO SCADA,registered,200,0.81,0,2026-07-01,2026-09-30,8.968,5.423,22.79,64.11,1.788,,
+NESBESS1,AEMO SCADA,calibrated,262.2,0.8761,0.423,2026-07-01,2026-09-30,3.766,2.143,8.354,99.36,2.241,0.9991,632
+NESBESS1,ACEN power,registered,200,0.81,0,2026-07-01,2026-09-30,7.989,4.515,25.98,334.4,-5.665,,
+NESBESS1,ACEN power,calibrated,262.6,0.9045,0.1897,2026-07-01,2026-09-30,4.183,1.71,7.148,21.3,0.5136,0.9996,609
+NESBESS2,AEMO SCADA,registered,200,0.81,0,2026-07-01,2026-08-31,5.016,3.026,9.827,59.14,1.921,,
+NESBESS2,AEMO SCADA,calibrated,260.1,0.8775,0.2153,2026-07-01,2026-08-31,2.725,1.465,7.268,76.6,2.278,0.9977,691
+NESBESS2,ACEN power,registered,200,0.81,0,2026-07-01,2026-08-31,4.309,2.432,9.686,123.6,-3.203,,
+NESBESS2,ACEN power,calibrated,261.7,0.8884,0.05189,2026-07-01,2026-08-31,2.737,1.077,5.393,6.177,0.1819,1,9
