@@ -9,7 +9,7 @@ with three pieces of open data:
 1. **State of charge (SoC) from market data, validated.** The SoC of a battery is reconstructed from AEMO's
    5-minute SCADA and checked against the SoC its operator publishes (ACEN's New England BESS, NSW).
 2. **State of health (SoH) from cell data.** Capacity fade of twelve large-format (180 Ah) stationary-storage LFP
-   cells, aged for 850 days in the lab (Yagci et al. 2025), gives the parameters of a semi-empirical ageing model:
+   cells, aged for 807-875 days in the lab (Yagci et al. 2025), gives the parameters of a semi-empirical ageing model:
    calendar ageing driven by time, temperature and SoC, cycle ageing counted with the rainflow method.
 3. **Strategy.** For four batteries in Australia's National Electricity Market (NEM), one year of actual operation
    is compared with perfect-foresight arbitrage with and without the cost of ageing in the objective: revenue,
@@ -27,8 +27,12 @@ Calibrated on June 2026 and tested on July-September (New England BESS, 2 x 100 
 | 2 | registered | 5.0 pp | 9.8 pp | 1.9 pp/day |
 | 2 | calibrated (260 MWh, RTE 0.88, 0.22 MW standby) | **2.7 pp** | 7.3 pp | 2.3 pp/day |
 
-- The operator's 0-100 % corresponds to about **262 MWh** at the connection point, against 200 MWh registered with
-  AEMO: the battery has room beyond its registered energy (DC overbuild).
+- The operator's 0-100 % corresponds to about **250-260 MWh** at the connection point, against 200 MWh registered
+  with AEMO: the battery has room beyond its registered energy (DC overbuild). The June calibration gives 262 MWh
+  (section 2); fitted month by month the value moves between 227 and 263 MWh (both sections, both power inputs,
+  `results/soc_monthly_calibration.csv`), and one fit over the whole ACEN record in the companion project
+  [bess-ops-warranty](https://github.com/kwwaleszczynski-del/bess-ops-warranty) gives 251-252 MWh. Market data pin
+  the usable energy down to roughly 10 %, not to the MWh.
 - Integrated without an anchor the SoC drifts by about 2 pp a day: the auxiliary load changes with the season
   (monthly fits: 0.4 to 0.8 MW) and the battery management system resets its SoC (11 and 6 jumps of up to 56 pp).
 - The stored energy NESBESS1 reported to AEMO ran **opposite** to its SoC until 5 August 2026 (it reported the
@@ -69,7 +73,11 @@ incremental-capacity features of an ordinary 50 A charge predicts capacity with 
 - Calendar ageing (9.9 % in ten years at 25 degC, about 1 %/yr on average) is the floor every strategy pays;
   cycling adds 0.6-0.8 %/yr in actual operation and 1.1-2.1 %/yr in the perfect-foresight strategies of the
   table. Actual operation uses the least life per year (12-14 years to 80 % SoH) but also earns the least per 1 %
-  of capacity lost: 6-10 M AUD, against 8-23 M AUD for the perfect-foresight strategies.
+  of capacity lost, battery by battery and although its revenue includes FCAS (4-7 % of it), which the energy-only
+  strategies do not have: Torrens Island 7.6 M AUD against 11.6-17.7 M AUD for the perfect-foresight strategies,
+  Blyth 10.1 against 17.1-22.8, Tarong 7.1 against 12.1-15.3, MREH A1 6.3 against 7.8-10.0. The ratio counts
+  calendar ageing, which every strategy pays (9.9 % of the 15.7-17.7 % lost in ten years of actual operation), so it
+  rewards throughput: the more a battery cycles, the more revenue shares the same calendar loss.
 - An ageing cost derived from the cell fit (27 AUD per MWh discharged at 250 AUD/kWh) instead of a cycle cap lets
   the battery cycle when spreads are large (Torrens Island: 2.7 cycles a day) and skip small ones. At the same
   capacity loss (interpolated along the 125/250/500 AUD/kWh points) it earns 1-6 % more than the 10 AUD/MWh rule.
@@ -230,7 +238,7 @@ A1 (VIC, 200 / 400). Their round-trip efficiency in the optimiser is the one cal
 |---|---|---|---|
 | AEMO MMSDM archive, NEMWeb | 5-min SCADA, prices, FCAS enablement, reported stored energy, registrations (Oct 2025 - Sep 2026) | [AEMO copyright permissions](https://www.aemo.com.au/privacy-and-legal-notices/copyright-permissions) (use with attribution) | 1.9 GB download, 125 MB cache |
 | [ACEN Australia, New England BESS operational data](https://acenrenewables.com.au/new-england-bess-operational-data/) | 5-min power, SoC and FCAS of both sections, May - Sep 2026 | none stated (ACEN Australia (c) 2026); downloaded for local use only, not redistributed | 5 MB |
-| Yagci, Richter, Behmann, Bessler, [Zenodo 10.5281/zenodo.22939281](https://doi.org/10.5281/zenodo.22939281) | 12 large-format LFP cells: checkups and per-cycle analysis | CC BY 4.0 | 0.46 GB of a 2.5 GB archive |
+| Yagci, Richter, Behmann, Bessler, [Zenodo 10.5281/zenodo.22939281](https://doi.org/10.5281/zenodo.22939281) (version 1.1, used here; all versions: [10.5281/zenodo.22010995](https://doi.org/10.5281/zenodo.22010995)) | 12 large-format LFP cells: checkups and per-cycle analysis | CC BY 4.0 | 0.46 GB of a 2.5 GB archive |
 
 Only derived numbers are published here; no raw data are in the repository.
 
@@ -272,6 +280,6 @@ tests/             no network
 Code: MIT. Data: Australian Energy Market Operator (AEMO), MMSDM data archive; ACEN Australia, New England BESS
 operational data; M. C. Yagci, O. Richter, R. Behmann and W. G. Bessler, "Degradation modes of large-format
 stationary-storage LFP-based lithium-ion cells during calendaric and cyclic aging", J. Energy Storage 124, 116774
-(2025), https://doi.org/10.1016/j.est.2025.116774, and the research data on Zenodo,
-https://doi.org/10.5281/zenodo.22010995 (CC BY 4.0). Results are derived from this material; none of the data
+(2025), https://doi.org/10.1016/j.est.2025.116774, and the research data on Zenodo, version 1.1,
+https://doi.org/10.5281/zenodo.22939281 (CC BY 4.0). Results are derived from this material; none of the data
 providers is responsible for this analysis.

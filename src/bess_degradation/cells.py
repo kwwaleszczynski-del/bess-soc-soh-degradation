@@ -1,6 +1,6 @@
 """Cell-level ageing data: large-format stationary-storage LFP cells (Yagci, Richter, Behmann, Bessler 2025).
 
-Twelve commercial 180 Ah LFP/graphite cells for stationary storage were aged for about 850 days: four by full
+Twelve commercial 180 Ah LFP/graphite cells for stationary storage were aged for 807-875 days: four by full
 cycling (35 and 50 degC) and eight by storage (calendar ageing) at 75 % and 100 % state of charge (35 and 50 degC).
 Reference performance tests ("checkups") were run before ageing and after the equivalent of 100, 500, 1000 and 1500
 cycles. Data: Zenodo, https://doi.org/10.5281/zenodo.22939281, CC BY 4.0.
